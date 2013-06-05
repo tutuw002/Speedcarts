@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.zant95.Speedcarts.Storage.MemStorage;
+
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 
 public class CommandHandler implements CommandExecutor {
@@ -44,7 +45,7 @@ public class CommandHandler implements CommandExecutor {
 											RailProcessor.set(min, max, Double.parseDouble(args[1]), false);
 											sender.sendMessage("\u00A7e[\u00A7fM\u00A7e] Selected rails are now customized with max speed: \u00A7f" + args[1] + "\u00A7e.");
 										} else {
-											sender.sendMessage("\u00A7cOnly \"auto\" optional parameter is valid.");
+											sender.sendMessage("\u00A7cOnly \"auto\" is valid as optional parameter.");
 										}
 									} else {
 										sender.sendMessage("\u00A7cYou must specify a valid number between 0 and 4.");
@@ -61,7 +62,7 @@ public class CommandHandler implements CommandExecutor {
 									sender.sendMessage("\u00A7eThis selection is now clean from ghost-rails.");
 								}
 							} else {
-								sender.sendMessage("\u00A7cYou need to make a selection first.");
+								sender.sendMessage("\u00A7cYou need to make a cuboid selection first.");
 							}
 						} else {
 							sender.sendMessage("\u00A7cSpeedcarts cannot save because data disk is loading.");

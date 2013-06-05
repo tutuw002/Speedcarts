@@ -20,12 +20,12 @@ public class MinecartListener implements Listener {
 	@EventHandler
 	public void onVehicleUpdate(VehicleUpdateEvent event) {
 		Location vehicleLoc = event.getVehicle().getLocation().getBlock().getLocation();
-		if (event.getVehicle() instanceof Minecart && MemStorage.customRails.containsKey(vehicleLoc)) {
+		if (event.getVehicle() instanceof Minecart && MemStorage.speedrails.containsKey(vehicleLoc)) {
 			Minecart minecart = ((Minecart)event.getVehicle());
 			if (!(minecart instanceof RideableMinecart)) {
 				minecart.setSlowWhenEmpty(false);
 			}
-			minecart.setMaxSpeed(MemStorage.customRails.get(vehicleLoc));
+			minecart.setMaxSpeed(MemStorage.speedrails.get(vehicleLoc));
 		}
 	}
 }

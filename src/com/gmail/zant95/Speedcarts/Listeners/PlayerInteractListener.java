@@ -31,8 +31,8 @@ public class PlayerInteractListener implements Listener {
 			Block block = event.getClickedBlock();
 			if (block.getState().getData() instanceof Rails) {
 				Location loc = block.getLocation();
-				if (MemStorage.customRails.containsKey(loc)) {
-					player.sendMessage(ChatColor.YELLOW + "The custom max speed of this rail is " + ChatColor.WHITE + MemStorage.customRails.get(loc) + ChatColor.YELLOW + ".");
+				if (MemStorage.speedrails.containsKey(loc)) {
+					player.sendMessage(ChatColor.YELLOW + "The custom max speed of this rail is " + ChatColor.WHITE + MemStorage.speedrails.get(loc) + ChatColor.YELLOW + ".");
 				} else {
 					player.sendMessage(ChatColor.YELLOW + "This is a normal rail.");
 				}

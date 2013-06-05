@@ -21,7 +21,7 @@ public class RailProcessor {
 				for (int z = minz; z<=maxz;z++) {
 					Block block = min.getWorld().getBlockAt(x, y, z);
 					if (isRail(block)) {
-						MemStorage.customRails.put(block.getLocation(), vel);
+						MemStorage.speedrails.put(block.getLocation(), vel);
 					}
 				}
 			}
@@ -38,22 +38,22 @@ public class RailProcessor {
 						if (isRail(block)) {
 							Rails rail = (Rails)block.getState().getData();
 							if (rail.isCurve() && vel >= 0.5) {
-								MemStorage.customRails.put(block.getLocation(), 0.5);
-								if (isRail(blockE)) MemStorage.customRails.put(blockE.getLocation(), 0.5);
-								if (isRail(blockN)) MemStorage.customRails.put(blockN.getLocation(), 0.5);
-								if (isRail(blockS)) MemStorage.customRails.put(blockS.getLocation(), 0.5);
-								if (isRail(blockW)) MemStorage.customRails.put(blockW.getLocation(), 0.5);
+								MemStorage.speedrails.put(block.getLocation(), 0.5);
+								if (isRail(blockE)) MemStorage.speedrails.put(blockE.getLocation(), 0.5);
+								if (isRail(blockN)) MemStorage.speedrails.put(blockN.getLocation(), 0.5);
+								if (isRail(blockS)) MemStorage.speedrails.put(blockS.getLocation(), 0.5);
+								if (isRail(blockW)) MemStorage.speedrails.put(blockW.getLocation(), 0.5);
 							} else if (rail.isOnSlope() && vel >= 0.4) {
-								MemStorage.customRails.put(block.getLocation(), 0.4);
-								if (isRail(blockE)) MemStorage.customRails.put(blockE.getLocation(), 0.4);
-								if (isRail(blockN)) MemStorage.customRails.put(blockN.getLocation(), 0.4);
-								if (isRail(blockS)) MemStorage.customRails.put(blockS.getLocation(), 0.4);
-								if (isRail(blockW)) MemStorage.customRails.put(blockW.getLocation(), 0.4);
+								MemStorage.speedrails.put(block.getLocation(), 0.4);
+								if (isRail(blockE)) MemStorage.speedrails.put(blockE.getLocation(), 0.4);
+								if (isRail(blockN)) MemStorage.speedrails.put(blockN.getLocation(), 0.4);
+								if (isRail(blockS)) MemStorage.speedrails.put(blockS.getLocation(), 0.4);
+								if (isRail(blockW)) MemStorage.speedrails.put(blockW.getLocation(), 0.4);
 							} else if (vel >= 0.5
 							&& (!isRail(block.getRelative(rail.getDirection()))
 								|| !isRail(block.getRelative(rail.getDirection().getOppositeFace()))
 							)) {
-								MemStorage.customRails.put(block.getLocation(), 0.5);
+								MemStorage.speedrails.put(block.getLocation(), 0.5);
 							}
 						}
 					}
@@ -74,7 +74,7 @@ public class RailProcessor {
 			for (int y = miny; y<=maxy;y++) {
 				for (int z = minz; z<=maxz;z++) {
 					Block block = min.getWorld().getBlockAt(x, y, z);
-					MemStorage.customRails.remove(block.getLocation());
+					MemStorage.speedrails.remove(block.getLocation());
 				}
 			}
 		}
@@ -93,7 +93,7 @@ public class RailProcessor {
 				for (int z = minz; z<=maxz;z++) {
 					Block block = min.getWorld().getBlockAt(x, y, z);
 					if (!isRail(block)) {
-						MemStorage.customRails.remove(block.getLocation());
+						MemStorage.speedrails.remove(block.getLocation());
 					}
 				}
 			}

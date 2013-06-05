@@ -1,6 +1,6 @@
 name: Speedcarts
 main: com.gmail.zant95.Speedcarts.Speedcarts
-version: 1.3.2
+version: 1.3.3
 author: zant95
 description: Improve your carts' speed.
 commands:
