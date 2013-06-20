@@ -1,8 +1,9 @@
 name: Speedcarts
 main: com.gmail.zant95.Speedcarts.Speedcarts
-version: 1.3.3
+version: 1.3.4
 author: zant95
 description: Improve your carts' speed.
+depend: [WorldEdit]
 commands:
    speedcarts:
       aliases: [sc]
