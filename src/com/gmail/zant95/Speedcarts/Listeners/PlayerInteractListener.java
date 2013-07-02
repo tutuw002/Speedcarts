@@ -2,7 +2,6 @@ package com.gmail.zant95.Speedcarts.Listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,7 +26,7 @@ public class PlayerInteractListener implements Listener {
 		if (player.hasPermission("speedcarts.view")
 		&& player.isSneaking()
 		&& event.getAction().equals(Action.RIGHT_CLICK_BLOCK)
-		&& player.getItemInHand().getType().equals(Material.GOLD_SPADE)) {
+		&& player.getItemInHand().getTypeId() == MemStorage.plugin.getConfig().getInt("speedcarts.non-block-tool")) {
 			Block block = event.getClickedBlock();
 			if (block.getState().getData() instanceof Rails) {
 				Location loc = block.getLocation();
@@ -37,6 +36,7 @@ public class PlayerInteractListener implements Listener {
 					player.sendMessage(ChatColor.YELLOW + "This is a normal rail.");
 				}
 			}
+			event.setCancelled(true);
 		}
 	}
 }

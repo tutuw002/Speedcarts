@@ -15,8 +15,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.gmail.zant95.Speedcarts.mcstats.Metrics;
-import com.gmail.zant95.Speedcarts.mcstats.Metrics.Graph;
+import com.gmail.zant95.Speedcarts.MCStats.Metrics;
+import com.gmail.zant95.Speedcarts.MCStats.Metrics.Graph;
 
 public class DiskStorage {
 	public static void asyncLoadSpeedrails() {
@@ -53,20 +53,20 @@ public class DiskStorage {
 				MemStorage.isLoadingStorage = false;
 				
 				//Implement Metrics
-				try {
-					Metrics metrics = new Metrics(MemStorage.plugin);
-					
-				    Graph graph = metrics.createGraph("Total speedrails");
-				    graph.addPlotter(new Metrics.Plotter("Speedrails") {
-						@Override
-						public int getValue() {
-							return MemStorage.speedrails.size();
-						}
-				    });
-					
-					metrics.start();
-				} catch (IOException e) {
-					// Failed to submit the stats :-(
+				if (MemStorage.plugin.getConfig().getBoolean("speedcarts.plugin-metrics")) {
+					try {
+						Metrics metrics = new Metrics(MemStorage.plugin);
+					    Graph graph = metrics.createGraph("Total speedrails");
+					    graph.addPlotter(new Metrics.Plotter("Speedrails") {
+							@Override
+							public int getValue() {
+								return MemStorage.speedrails.size();
+							}
+					    });
+						metrics.start();
+					} catch (IOException e) {
+						// Failed to submit the stats :-(
+					}
 				}
 			}
 		});

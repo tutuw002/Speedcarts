@@ -2,7 +2,6 @@ package com.gmail.zant95.Speedcarts;
 
 import java.io.File;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,15 +17,24 @@ public class Speedcarts extends JavaPlugin {
 	public void onEnable() {
 		//Setup WorldEdit
 		if (getWorldEdit() == null) {
-			Bukkit.getLogger().info("WorldEdit dependency not found!");
-			getServer().getPluginManager().disablePlugin(this);
+			this.getLogger().severe("WorldEdit dependency not found!");
+			this.getServer().getPluginManager().disablePlugin(this);
 		}
 		
-		//Load storage
+		//Setup plugin folder
 		if (!this.getDataFolder().exists()) {
+			this.getLogger().info("Creating plugin folder...");
 			new File(this.getDataFolder().toString()).mkdir();	
 		}
+		
+		//Setup config
+		Config.setup();
+		
+		//Load storage
 		DiskStorage.asyncLoadSpeedrails();
+		
+		//Check for updates
+		UpdateChecker.check();
 		
 		//Implement listeners
 		PluginManager pm = getServer().getPluginManager();
@@ -34,18 +42,19 @@ public class Speedcarts extends JavaPlugin {
 		pm.registerEvents(new PlayerInteractListener(this), this);
 		
 		//Implement commands
-		getCommand("speedcarts").setExecutor(new CommandHandler(this));
+		this.getCommand("speedcarts").setExecutor(new CommandHandler(this));
 		
-		Bukkit.getLogger().info("Speedcarts enabled!");
+		//Enable message
+		this.getLogger().info("Speedcarts enabled!");
 	}
 	
 	@Override
 	public void onDisable() {
-		Bukkit.getLogger().info("Goodbye Speedcarts!");
+		this.getLogger().info("Goodbye Speedcarts!");
 	}
 	
 	public WorldEditPlugin getWorldEdit() {
-		Plugin WorldEdit = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
+		Plugin WorldEdit = this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if (WorldEdit == null || !(WorldEdit instanceof WorldEditPlugin)) {
 			return null;
 		}

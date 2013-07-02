@@ -22,10 +22,9 @@ public class MinecartListener implements Listener {
 		Location vehicleLoc = event.getVehicle().getLocation().getBlock().getLocation();
 		if (event.getVehicle() instanceof Minecart && MemStorage.speedrails.containsKey(vehicleLoc)) {
 			Minecart minecart = ((Minecart)event.getVehicle());
-			if (!(minecart instanceof RideableMinecart)) {
-				minecart.setSlowWhenEmpty(false);
+			if (!(minecart instanceof RideableMinecart && minecart.getPassenger() == null)) {
+				minecart.setMaxSpeed(MemStorage.speedrails.get(vehicleLoc));
 			}
-			minecart.setMaxSpeed(MemStorage.speedrails.get(vehicleLoc));
 		}
 	}
 }
